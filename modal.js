@@ -87,6 +87,9 @@ $modal = function (options) {
         setContent: function (html) {
             _elemModal.querySelector('[data-modal="content"]').innerHTML = html;
         },
+        getContent: function() {
+            return _elemModal.querySelector('[data-modal="content"]').innerHTML;
+        },
         setTitle: function (text) {
             _elemModal.querySelector('[data-modal="title"]').innerHTML = text;
         }

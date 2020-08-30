@@ -26,10 +26,16 @@ body {
     font-size: 55px;
 }
 
-#showProductsListButton {
-    margin: 50px;
+#showProductsListButton,
+#showFromChoosePrList {
+    margin-top: 50px;
     font-size: 25px;
     text-decoration: underline;
     cursor: pointer;
     display: none;
+}
+
+#showFromChoosePrList {
+    display: block;
+    margin-bottom: 50px;
 }
