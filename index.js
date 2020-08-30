@@ -84,9 +84,11 @@ let containerText = '';
 
 const containerTextReload = () => {
     containerText = '';
-    productList.forEach(element => {
-        containerText += "<div><input type='text' value='"+element+"' class='input_element' /><span class='remove_element' id='remove_"+element+"'>-</span></div>"
-    });
+    if(productList.length !== 0) {
+        productList.forEach(element => {
+            containerText += "<div><input type='text' value='"+element+"' class='input_element' /><span class='remove_element' id='remove_"+element+"'>-</span></div>"
+        });
+    }
     modalChoosing.setContent(containerText);
 }
 
