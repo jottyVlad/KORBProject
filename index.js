@@ -31,7 +31,7 @@ let productList = [];
 
 const reloadProductList = () => {
     productList = localStorage.getItem('products');
-    if(productList === []) {
+    if(productList === null) {
         document.onmousemove = null;
         swipeElement.style.left = "0";
         swipeElement.style.top = "0";
