@@ -1,6 +1,6 @@
-(function () {
+(() => {
     if (typeof window.CustomEvent === "function") return false;
-    function CustomEvent(event, params) {
+    const CustomEvent = (event, params) => {
         params = params || { bubbles: false, cancelable: false, detail: null };
         var evt = document.createEvent('CustomEvent');
         evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
@@ -9,7 +9,7 @@
     window.CustomEvent = CustomEvent;
 })();
 
-$modal = function (options) {
+$modal = (options) => {
     var
         _elemModal,
         _eventShowModal,
@@ -18,7 +18,7 @@ $modal = function (options) {
         _destroyed = false,
         _animationSpeed = 200;
 
-    function _createModal(options) {
+    const _createModal = (options) => {
         var
             elemModal = document.createElement('div'),
             modalTemplate = '<div class="modal__backdrop" data-dismiss="modal"><div class="modal__content"><div class="modal__header"><div class="modal__title" data-modal="title">{{title}}</div><span class="modal__btn-close" data-dismiss="modal" title="Закрыть">×</span></div><div class="modal__body" data-modal="content">{{content}}</div>{{footer}}</div></div>',
@@ -45,14 +45,14 @@ $modal = function (options) {
         return elemModal;
     }
 
-    function _showModal() {
+    const _showModal = () => {
         if (!_destroyed && !_hiding) {
             _elemModal.classList.add('modal__show');
             document.dispatchEvent(_eventShowModal);
         }
     }
 
-    function _hideModal() {
+    const _hideModal = () => {
         _hiding = true;
         _elemModal.classList.remove('modal__show');
         _elemModal.classList.add('modal__hiding');
@@ -63,7 +63,7 @@ $modal = function (options) {
         document.dispatchEvent(_eventHideModal);
     }
 
-    function _handlerCloseModal(e) {
+    const _handlerCloseModal = (e) => {
         if (e.target.dataset.dismiss === 'modal') {
             _hideModal();
         }
@@ -79,18 +79,18 @@ $modal = function (options) {
     return {
         show: _showModal,
         hide: _hideModal,
-        destroy: function () {
+        destroy: () => {
             _elemModal.parentElement.removeChild(_elemModal),
                 _elemModal.removeEventListener('click', _handlerCloseModal),
                 _destroyed = true;
         },
-        setContent: function (html) {
+        setContent: (html) => {
             _elemModal.querySelector('[data-modal="content"]').innerHTML = html;
         },
-        getContent: function() {
+        getContent: () => {
             return _elemModal.querySelector('[data-modal="content"]').innerHTML;
         },
-        setTitle: function (text) {
+        setTitle: (text) => {
             _elemModal.querySelector('[data-modal="title"]').innerHTML = text;
         }
     }

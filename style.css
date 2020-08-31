@@ -15,9 +15,6 @@ body {
 }
 
 #swipeProduct {
-    position: relative;
-    top: 0;
-    left: 0;
     width: fit-content;
     width: -moz-fit-content;
     height: fit-content;

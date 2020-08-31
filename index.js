@@ -97,30 +97,25 @@ buttonProductFromChooseElement.onmousedown = (e) => {
     modalChoosing.show();
 }
 
-swipeElement.onmousedown = (e) => {
-    if(goNext === false) 
-        return;
-    var left = parseInt( window.getComputedStyle(swipeElement).getPropertyValue("left") );
-    var top = parseInt( window.getComputedStyle(swipeElement).getPropertyValue("top") );
-    var mouseX = e.clientX;
-    var mouseY = e.clientY;
-
-    document.onmousemove = (e) => {
-        var dx = mouseX - e.clientX;
-        var dy = mouseY - e.clientY;
-
-        swipeElement.style.left = left - dx + "px";
-        swipeElement.style.top = top - dy + "px";
-    };
-}
-
-swipeElement.onmouseup = () => {
+hammerswipe.on('pan', (e) => {
     if(goNext === false)
         return;
-    document.onmousemove = null;
-    swipeElement.style.left = "0";
-    swipeElement.style.top = "0";
-}
+    anime({
+        targets: '#swipeProduct',
+        translateX: e.deltaX,
+        translateY: e.deltaY,
+        duration: 0,
+    });
+});
+
+hammerswipe.on('panend', (e) => {
+    anime({
+        targets: '#swipeProduct',
+        translateX: 0,
+        translateY: 0,
+        duration: 700,
+    })
+});
 
 document.addEventListener('click', (e) => {
     if(e.target.id.startsWith("remove_")) {
@@ -141,6 +136,7 @@ document.addEventListener('click', (e) => {
         buttonsRemoveElement = document.getElementsByClassName("remove_element");
         productList.push('');
     } else if(e.target.dataset.handler == "modalChoosingHandlerOk") {
+        // Checking for absence same values and absence empty values
         var inputs = document.getElementsByClassName("input_element");
         var values = []
         for(var i = 0; i < inputs.length; i++) {
@@ -148,7 +144,6 @@ document.addEventListener('click', (e) => {
                 return;
             values.push(inputs[i].value);
         }
-
         var valuesSet = new Set(values);
         if(valuesSet.size !== values.length)
             return;
